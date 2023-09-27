@@ -1,0 +1,56 @@
+**Kinect Azure MKV Video Cropper Documentation**
+
+---
+
+### **Overview**
+
+This script is designed to process Kinect Azure MKV videos, specifically by allowing the user to select a region within the first frame of each video and cropping all subsequent frames to that region. The user is able to process multiple videos at once, with each cropping operation running in a separate process to increase the efficiency and speed of processing.
+
+---
+
+### **Features**
+
+1. **Multiple Video Processing**: The script can process multiple videos sequentially, but the cropping operation for each video is done in parallel.
+2. **Graphical Region Selection**: For each video, the tenth frame is displayed. The user can move the mouse to see a preview of the cropping rectangle and click to select the crop region.
+3. **Dynamic Rectangle Size**: Users can specify the width and height of the cropping rectangle via command-line arguments.
+4. **Multiprocessing**: The script utilizes multiprocessing to crop each video in a separate process, enabling faster concurrent processing.
+
+---
+
+### **Usage**
+
+1. **Command Line Arguments**:
+
+    * `--input`: Specifies the name(s) of the input video file(s). If processing multiple videos, separate the filenames with commas. Default is 'K1.mkv'.
+    
+    * `--output`: Specifies the name(s) of the output video file(s). If processing multiple videos, separate the filenames with commas. There should be a one-to-one correspondence with the input files. Default is 'K1_Cropped_Color.mkv'.
+    
+    * `--rect_size`: Specifies the width and height of the rectangle used for cropping. Default is 500x500 pixels.
+
+2. **Steps**:
+
+    * Run the script with the desired arguments.
+    * For each video, the tenth frame will be displayed. Move the mouse to preview the cropping region. Click to select the region.
+    * Once the region is selected, the cropping process will begin for that video in the background.
+    * If processing multiple videos, repeat the selection process for each video.
+    * Wait for all processes to complete (if waiting is enabled in the script).
+
+---
+
+### **Example**:
+
+```bash
+python script_name.py --input video1.mkv,video2.mkv --output output1.mkv,output2.mkv --rect_size 600 600
+```
+
+---
+
+### **Notes**:
+
+* Ensure that OpenCV is properly installed (`cv2` module).
+* Make sure the videos you want to crop are present in the specified location or provide the full path in the `--input` argument.
+* If you encounter any issues with multiprocessing, especially on Windows, ensure that the script is being executed under the `if __name__ == "__main__":` guard.
+
+---
+
+**End of Documentation**

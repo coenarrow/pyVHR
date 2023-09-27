@@ -1,0 +1,71 @@
+[mjpeg @ 000001cc1086aec0] error dc
+[mjpeg @ 000001cc1086aec0] error y=116 x=106
+[mjpeg @ 000001cc1086c5c0] error dc
+[mjpeg @ 000001cc1086c5c0] error y=267 x=49
+[mjpeg @ 000001cc1086c5c0] error dc
+[mjpeg @ 000001cc1086c5c0] error y=13 x=211
+[mjpeg @ 000001cc10c26380] error dc
+[mjpeg @ 000001cc10c26380] error y=132 x=179
+[mjpeg @ 000001cc10c26380] error dc
+[mjpeg @ 000001cc10c26380] error y=97 x=147
+[mjpeg @ 000001cc10adec00] error count: 65
+[mjpeg @ 000001cc10adec00] error y=13 x=59
+[mjpeg @ 000001cc11339980] error dc
+[mjpeg @ 000001cc11339980] error y=147 x=22
+[mjpeg @ 000001cc10746d80] error dc
+[mjpeg @ 000001cc10746d80] error y=166 x=199
+[mjpeg @ 000001cc10c1ec80] error dc
+[mjpeg @ 000001cc10c1ec80] error y=45 x=228
+[mjpeg @ 000001cc10828300] error dc
+[mjpeg @ 000001cc10828300] error y=147 x=34
+[mjpeg @ 000001cc1120ccc0] error dc
+[mjpeg @ 000001cc1120ccc0] error y=150 x=33
+[mjpeg @ 00000240060dcbc0] error dc
+[mjpeg @ 00000240060dcbc0] error y=131 x=29
+[mjpeg @ 000002400586bec0] error dc
+[mjpeg @ 000002400586bec0] error y=215 x=25
+[mjpeg @ 0000024005118d00] error dc
+[mjpeg @ 0000024005118d00] error y=111 x=218
+[mjpeg @ 0000024006395d00] error dc
+[mjpeg @ 0000024006395d00] error y=131 x=141
+[mjpeg @ 0000024006399300] overread 8
+[matroska,webm @ 00000240061fda00] 0x00 at pos 1698854384 (0x654275f0) invalid as first byte of an EBML number
+[mjpeg @ 00000240051163c0] error dc
+[mjpeg @ 00000240051163c0] error y=147 x=108
+Process Process-3:
+Traceback (most recent call last):
+  File "C:\Users\20759193\AppData\Local\anaconda3\envs\pyvhr\lib\multiprocessing\connection.py", line 317, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+BrokenPipeError: [WinError 109] The pipe has been ended
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\20759193\AppData\Local\anaconda3\envs\pyvhr\lib\multiprocessing\process.py", line 315, in _bootstrap
+    self.run()
+  File "C:\Users\20759193\AppData\Local\anaconda3\envs\pyvhr\lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\20759193\source\repos\pyVHR\scripts\crop_color_frames.py", line 105, in worker
+    crop_color_frames_with_semaphore(input_file, click_coordinates, RECT_SIZE, output_file, semaphore, progress_dict)
+  File "C:\Users\20759193\source\repos\pyVHR\scripts\crop_color_frames.py", line 92, in crop_color_frames_with_semaphore
+    crop_color_frames(input_file, click_coordinates, rect_size, output_file, progress_dict)
+  File "C:\Users\20759193\source\repos\pyVHR\scripts\crop_color_frames.py", line 73, in crop_color_frames
+    progress_dict[input_filename] = f'{progress_percentage:.2f}% completed' # <-- Update the shared dict
+  File "<string>", line 2, in __setitem__
+  File "C:\Users\20759193\AppData\Local\anaconda3\envs\pyvhr\lib\multiprocessing\managers.py", line 810, in _callmethod
+    kind, result = conn.recv()
+  File "C:\Users\20759193\AppData\Local\anaconda3\envs\pyvhr\lib\multiprocessing\connection.py", line 255, in recv
+    buf = self._recv_bytes()
+  File "C:\Users\20759193\AppData\Local\anaconda3\envs\pyvhr\lib\multiprocessing\connection.py", line 326, in _recv_bytes
+    raise EOFError
+EOFError
+[mjpeg @ 000001f909cee4c0] error dc
+[mjpeg @ 000001f909cee4c0] error y=46 x=106
+[matroska,webm @ 000001f90a3d51c0] 0x00 at pos 1628427159 (0x610fd397) invalid as first byte of an EBML number
+[mjpeg @ 000001f90a2c3100] error dc
+[mjpeg @ 000001f90a2c3100] error y=48 x=139
+[mjpeg @ 000001f90a58ebc0] error dc
+[mjpeg @ 000001f90a58ebc0] error y=162 x=234
+[mjpeg @ 000001f90a8ecc00] error dc
+[mjpeg @ 000001f90a8ecc00] error y=214 x=102
+[matroska,webm @ 00000266062bd880] File ended prematurely
