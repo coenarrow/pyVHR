@@ -576,7 +576,7 @@ class SignalProcessing():
             overlap (int): number of pixels that the patches overlap.
         """
         if self.square is None and self.rects is None:
-            print("[ERROR] Use set_landmarks_squares or set_landmarkds_rects before calling this function!")
+            print("[ERROR] Use set_landmarks_squares or set_landmarks_rects before calling this function!")
             return None
         if region_type != "squares" and region_type != "rects":
             print("[ERROR] Invalid landmarks region type!")

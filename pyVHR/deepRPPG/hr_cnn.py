@@ -12,8 +12,10 @@ import os
 import requests
 
 
-def HR_CNN_bvp_pred(frames,verb = 1):
-    print("initialize model...")
+def HR_CNN_bvp_pred(frames,verb = 1,filter_pred = False):
+    
+    if verb == 1:
+        print("initialize model...")
 
     model_path = pyVHR.__path__[0] + '/deepRPPG/HR_CNN/hr_cnn_model.pth'
     if not os.path.isfile(model_path):
@@ -70,11 +72,13 @@ def HR_CNN_bvp_pred(frames,verb = 1):
 
     outputs = outputs.tolist()
 
-    fs = 30
-    lowcut = 0.8
-    highcut = 6
+    if filter_pred:
+        fs = 30
+        lowcut = 0.5
+        highcut = 4
 
-    filtered_outputs = butter_bandpass_filter(outputs, lowcut, highcut, fs, order=4)
-    filtered_outputs = (filtered_outputs - np.mean(filtered_outputs)) / np.std(filtered_outputs)
+        filtered_outputs = butter_bandpass_filter(outputs, lowcut, highcut, fs, order=6)
+        filtered_outputs = (filtered_outputs - np.mean(filtered_outputs)) / np.std(filtered_outputs)
+        outputs = filtered_outputs
 
-    return np.array(filtered_outputs)
+    return np.array(outputs)

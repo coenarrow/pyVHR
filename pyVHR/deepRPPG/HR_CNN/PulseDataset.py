@@ -22,7 +22,7 @@ class PulseDataset(Dataset):
         self.img_w = img_w
         self.img_h = img_h
         self.transform = transform
-        print('Found', self.__len__(), "frames")
+        #print('Found', self.__len__(), "frames")
 
     def __len__(self):
         return self.frames_list.__len__()
