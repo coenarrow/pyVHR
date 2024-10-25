@@ -8,8 +8,9 @@ if os.path.isfile(requirementPath):
     with open(requirementPath) as f:
         reqs = f.read().splitlines()
 
-with open("README.md", "r") as fh:
+with open("README.md", encoding="utf-8") as fh:
     long_description = fh.read()
+
 
 setuptools.setup(
     name="pyVHR",
