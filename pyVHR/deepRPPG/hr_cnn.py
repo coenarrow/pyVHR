@@ -1,4 +1,3 @@
-import pyVHR
 import numpy as np
 import torch
 import torchvision.transforms as transforms
@@ -8,15 +7,21 @@ from torch.utils.data import DataLoader
 from .HR_CNN.utils import butter_bandpass_filter
 from .HR_CNN.PulseDataset import PulseDataset
 from .HR_CNN.FaceHRNet09V4ELU import FaceHRNet09V4ELU
+import os
+import requests
 
-
-def HR_CNN_bvp_pred(frames):
+def HR_CNN_bvp_pred(frames:list,model_path:str=None) -> np.ndarray:
     print("initialize model...")
 
-    model_path = pyVHR.__path__[0] + '/deepRPPG/HR_CNN/hr_cnn_model.pth'
+    # Get the directory of the current module
+    module_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Construct the path to the model file relative to the module directory
+    if model_path is None:
+        model_path = os.path.join(module_dir, 'hr_cnn_model.pth')
     if not os.path.isfile(model_path):
       url = "https://github.com/phuselab/pyVHR/raw/master/resources/deepRPPG/hr_cnn_model.pth"
-      print('Downloading MTTS_CAN model...')
+      print(f'Downloading HR_CNN model to {model_path}...')
       r = requests.get(url, allow_redirects=True)
       open(model_path, 'wb').write(r.content)   
 
@@ -64,13 +69,17 @@ def HR_CNN_bvp_pred(frames):
 
     outputs = (outputs - torch.mean(outputs)) / torch.std(outputs)
 
-    outputs = outputs.tolist()
+    outputs = np.array(outputs.tolist())
 
-    fs = 30
-    lowcut = 0.8
-    highcut = 6
+    return outputs
 
-    filtered_outputs = butter_bandpass_filter(outputs, lowcut, highcut, fs, order=4)
-    filtered_outputs = (filtered_outputs - np.mean(filtered_outputs)) / np.std(filtered_outputs)
+def filter_HR_CNN_outputs(bvp_outputs:np.ndarray,filtering_fps:float,min_bpm:float,max_bpm:float,order:int=4) -> np.ndarray:
 
-    return np.array(filtered_outputs)
+    fs = filtering_fps
+    lowcut = min_bpm/60
+    highcut = max_bpm/60
+
+    filtered_outputs = butter_bandpass_filter(bvp_outputs, lowcut, highcut, fs, order=order)
+    normalized_outputs = np.array(filtered_outputs - np.mean(filtered_outputs)) / np.std(filtered_outputs)
+
+    return np.array(normalized_outputs)
