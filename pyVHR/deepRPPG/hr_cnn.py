@@ -47,7 +47,7 @@ def HR_CNN_bvp_pred(frames:list,model_path:str=None) -> np.ndarray:
 
     val_loader = DataLoader(
         pulse_test,
-        batch_size=128, shuffle=False, pin_memory=True, drop_last=True)
+        batch_size=128, shuffle=False, pin_memory=True, drop_last=False)
 
     model.eval()
 
