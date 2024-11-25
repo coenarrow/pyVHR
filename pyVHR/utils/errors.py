@@ -184,7 +184,7 @@ def concordance_correlation_coefficient(bpm_true, bpm_pred):
     return numerator/denominator
 
 
-def get_SNR(bvps, fps, reference_hrs, timesES):
+def get_SNR(bvps, fps, reference_hrs):
     '''Computes the signal-to-noise ratio of the BVP
     signals according to the method by -- de Haan G. et al., IEEE Transactions on Biomedical Engineering (2013).
     SNR calculated as the ratio (in dB) of power contained within +/- 0.1 Hz
@@ -214,7 +214,8 @@ def get_SNR(bvps, fps, reference_hrs, timesES):
             snr = 10*np.log10(SPower/allPower)
             win_snr.append(snr)
         SNRs.append(np.median(win_snr))
-    return np.array([np.mean(SNRs)])
+    SNRs = np.array(SNRs)
+    return SNRs
 
 def BVP_windowing(bvp, wsize, fps, stride=1):
   """ Performs BVP signal windowing
