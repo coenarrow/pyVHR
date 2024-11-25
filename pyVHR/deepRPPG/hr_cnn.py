@@ -73,13 +73,36 @@ def HR_CNN_bvp_pred(frames:list,model_path:str=None) -> np.ndarray:
 
     return outputs
 
-def filter_HR_CNN_outputs(bvp_outputs:np.ndarray,filtering_fps:float,min_bpm:float,max_bpm:float,order:int=4) -> np.ndarray:
+def filter_HR_CNN_outputs(bvp_outputs:np.ndarray,
+                          fps:float,
+                          min_bpm:float,
+                          max_bpm:float,
+                          order:int=4) -> np.ndarray:
+    """
+    Filter the HR_CNN outputs using a bandpass filter
+    
+    Parameters
+    ----------
+    bvp_outputs : np.ndarray
+        The HR_CNN outputs to filter
+    fps : float
+        The frames per second of the video
+    min_bpm : float
+        The minimum BPM to filter
+    max_bpm : float
+        The maximum BPM to filter
+    order : int
+        The order of the Butterworth filter
 
-    fs = filtering_fps
+    Returns
+    -------
+    np.ndarray
+        The filtered outputs
+    """
     lowcut = min_bpm/60
     highcut = max_bpm/60
 
-    filtered_outputs = butter_bandpass_filter(bvp_outputs, lowcut, highcut, fs, order=order)
+    filtered_outputs = butter_bandpass_filter(bvp_outputs, lowcut, highcut, fps, order=order)
     normalized_outputs = np.array(filtered_outputs - np.mean(filtered_outputs)) / np.std(filtered_outputs)
 
     return np.array(normalized_outputs)
