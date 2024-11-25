@@ -306,7 +306,7 @@ class BPM:
         # -- interpolation for less than 256 samples
         if self.data.shape[0] == 0:
             return np.float32(0.0)
-        Pfreqs, Power = Welch(self.data, self.fps, self.minHz, self.maxHz, self.nFFT)
+        Pfreqs, Power = Welch(bvps=self.data, fs=self.fps)
         # F are frequencies, PSD is Power Spectrum Density of all estimators
         F = Pfreqs
         PSD = Power
