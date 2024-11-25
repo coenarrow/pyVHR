@@ -181,3 +181,5 @@ Thumbs.db
 # Editor backup files #
 #######################
 *~
+pyVHR/deepRPPG/hr_cnn_model.pth
+pyVHR/deepRPPG/mtts_can_model.hdf5
