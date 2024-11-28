@@ -213,6 +213,8 @@ def get_SNR(bvps, fps, reference_hrs):
             allPower = np.sum(p[FMask])
             if allPower == 0:
                 snr = -np.inf
+            elif SPower/allPower <= 0:
+                snr = -np.inf
             else:
                 snr = 10*np.log10(SPower/allPower)
             win_snr.append(snr)
