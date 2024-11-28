@@ -211,7 +211,10 @@ def get_SNR(bvps, fps, reference_hrs):
             p = power[i,:]
             SPower = np.sum(p[GTMask])
             allPower = np.sum(p[FMask])
-            snr = 10*np.log10(SPower/allPower)
+            if allPower != 0:
+                snr = 10*np.log10(SPower/allPower)
+            else:
+                snr = np.nan
             win_snr.append(snr)
         SNRs.append(np.median(win_snr))
     SNRs = np.array(SNRs)
