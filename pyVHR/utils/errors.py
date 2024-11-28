@@ -193,8 +193,8 @@ def get_SNR(bvps, fps, reference_hrs):
     Adapted from https://github.com/danmcduff/iphys-toolbox/blob/master/tools/bvpsnr.m
     '''
    
-    interv1 = 0.2*60
-    interv2 = 0.2*60
+    interv1 = 6
+    interv2 = 12
     NyquistF = fps/2.;
     FResBPM = 0.5
     nfft = np.ceil((60*2*NyquistF)/FResBPM)
@@ -211,13 +211,12 @@ def get_SNR(bvps, fps, reference_hrs):
             p = power[i,:]
             SPower = np.sum(p[GTMask])
             allPower = np.sum(p[FMask])
-            if allPower != 0:
-                snr = 10*np.log10(SPower/allPower)
+            if allPower == 0:
+                snr = -np.inf
             else:
-                snr = np.nan
+                snr = 10*np.log10(SPower/allPower)
             win_snr.append(snr)
-        SNRs.append(np.median(win_snr))
-    SNRs = np.array(SNRs)
+        SNRs.append(np.array(win_snr))
     return SNRs
 
 def BVP_windowing(bvp, wsize, fps, stride=1):
