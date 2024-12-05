@@ -193,8 +193,8 @@ def get_SNR(bvps, fps, reference_hrs):
     Adapted from https://github.com/danmcduff/iphys-toolbox/blob/master/tools/bvpsnr.m
     '''
    
-    interv1 = 6
-    interv2 = 12
+    interv1 = 6 # 0.1 Hz -> 6 BPM
+    interv2 = 12 # 0.2 Hz -> 12 BPM
     NyquistF = fps/2.;
     FResBPM = 0.5
     nfft = np.ceil((60*2*NyquistF)/FResBPM)
